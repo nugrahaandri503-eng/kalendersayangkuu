@@ -61,6 +61,7 @@ document.getElementById('btn-save-permanent').addEventListener('click', function
 
     fetch(API_URL, {
         method: 'POST',
+        mode: 'no-cors',
         body: payload,
         headers: { 'Content-Type': 'text/plain;charset=utf-8' }
     }).then(response => console.log("Sukses meluncur ke Spreadsheet!"))
