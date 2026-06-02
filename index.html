@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siklus Kesayangan 🌸</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Halo, Sayang! ✨</h1>
+            <p>Aku bikin ini khusus buat pantau kesehatan dan *mood* kamu.</p>
+        </header>
+
+        <section class="card form-section">
+            <form id="tracker-form">
+                <label for="start-date">Kapan hari pertama haid terakhirmu sayang?</label>
+                <input type="date" id="start-date" required>
+                <div class="btn-group">
+                    <button type="submit" class="btn-cute">Simpan Tanggal 💖</button>
+                    <button type="button" id="btn-reset" class="btn-reset">Ubah Tanggal 🔄</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="result-section" class="card result-section hidden">
+            <div class="ring-container">
+                <div class="cycle-ring float-anim">
+                    <span id="day-counter">Hari ke-?</span>
+                </div>
+            </div>
+            
+            <div class="countdown-box">
+                <h3 id="next-period-countdown">Haid berikutnya dalam: ? hari</h3>
+            </div>
+            
+            <h2 id="phase-title">Fase Saat Ini</h2>
+            <div class="insight-card">
+                <p id="cute-message" class="message">Teks penyemangat akan muncul di sini...</p>
+                <div class="tips-box">
+                    <strong>💡 Pesan dari Aku:</strong>
+                    <p id="health-tips">Saran nutrisi akan muncul di sini.</p>
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <h3>🗓️ Jadwal Tubuhmu Bulan Ini:</h3>
+                <ul class="timeline-list">
+                    <li class="clickable-phase" data-phase="menstruasi">
+                        🩸 <strong>Menstruasi:</strong> <span id="date-menstruasi"></span>
+                        <span class="click-hint">(Klik buat baca info ilmiahnya 👩‍🔬)</span>
+                    </li>
+                    <li class="clickable-phase" data-phase="folikuler">
+                        🌸 <strong>Folikuler:</strong> <span id="date-follicular"></span>
+                        <span class="click-hint">(Klik buat baca info ilmiahnya 👩‍🔬)</span>
+                    </li>
+                    <li class="clickable-phase" data-phase="ovulasi">
+                        🔥 <strong>Ovulasi (Subur):</strong> <span id="date-ovulation"></span>
+                        <span class="click-hint">(Klik buat baca info ilmiahnya 👩‍🔬)</span>
+                    </li>
+                    <li class="clickable-phase" data-phase="luteal">
+                        ☁️ <strong>Luteal (PMS):</strong> <span id="date-luteal"></span>
+                        <span class="click-hint">(Klik buat baca info ilmiahnya 👩‍🔬)</span>
+                    </li>
+                    <li>🩸 <strong>Haid Berikutnya:</strong> <span id="date-next-period"></span></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Kotak Pop-up (Modal) Penjelasan Jurnal Ilmiah -->
+    <div id="science-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h3 id="modal-title">Judul Fase</h3>
+            <div id="modal-body" class="modal-body-text">
+                Teks penjelasan jurnal ilmiah akan muncul di sini.
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
