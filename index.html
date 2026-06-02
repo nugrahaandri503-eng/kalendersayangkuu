@@ -3,83 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siklus Kesayangan 🌸</title>
+    <title>Siklus Mens</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Halo, Sayang! ✨</h1>
-            <p>Aku bikin ini khusus buat pantau kesehatan dan *mood* kamu.</p>
+            <h1>Halo, Sarah Sayangku! ✨</h1>
+            <p>Sistem pemantau kesehatan, siklus, dan *mood* khusus buat pacarku.😋</p>
         </header>
 
-        <section class="card form-section">
-            <form id="tracker-form">
-                <label for="start-date">Kapan hari pertama haid terakhirmu sayang?</label>
-                <input type="date" id="start-date" required>
-                <div class="btn-group">
-                    <button type="submit" class="btn-cute">Simpan Tanggal 💖</button>
-                    <button type="button" id="btn-reset" class="btn-reset">Ubah Tanggal 🔄</button>
-                </div>
-            </form>
-        </section>
+        <div class="grid-layout">
+            <!-- KOLOM KIRI: FORM & REKAM JEJAK -->
+            <div class="left-column">
+                <section class="card form-section">
+                    <h3>📝 Kalkulator Siklus</h3>
+                    <p class="small-text">Bebas coba-coba tanggal di sini. Kalau di-refresh bakal balik ke data awal.</p>
+                    <form id="tracker-form">
+                        <label for="start-date">Mulai Haid:</label>
+                        <input type="date" id="start-date" required>
+                        
+                        <label for="end-date">Konfirmasi Selesai Mens (Bisa dikosongi dulu):</label>
+                        <input type="date" id="end-date">
 
-        <section id="result-section" class="card result-section hidden">
-            <div class="ring-container">
-                <div class="cycle-ring float-anim">
-                    <span id="day-counter">Hari ke-?</span>
-                </div>
-            </div>
-            
-            <div class="countdown-box">
-                <h3 id="next-period-countdown">Haid berikutnya dalam: ? hari</h3>
-            </div>
-            
-            <h2 id="phase-title">Fase Saat Ini</h2>
-            <div class="insight-card">
-                <p id="cute-message" class="message">Teks penyemangat akan muncul di sini...</p>
-                <div class="tips-box">
-                    <strong>💡 Pesan dari Aku:</strong>
-                    <p id="health-tips">Saran nutrisi akan muncul di sini.</p>
-                </div>
+                        <label for="cycle-length">Lama Siklus (Biasanya 28 hari):</label>
+                        <input type="number" id="cycle-length" value="28" min="20" max="45" required>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn-cute">Kalkulasikan Jadwal 🧮</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="card history-card" id="history-section">
+                    <h3>🩺 Data Rekam Jejak Permanen</h3>
+                    <div id="health-status-box" class="health-box">
+                        <span id="health-icon">⏳</span>
+                        <p id="health-text">Belum ada data tersimpan...</p>
+                    </div>
+                    <ul class="history-list" id="history-list"></ul>
+                    
+                    <!-- TOMBOL DOWNLOAD -->
+                    <button id="btn-download-csv" class="btn-info" style="margin-top: 15px; width: 100%; border-radius: 10px;">📥 Unduh Data (Excel / Spreadsheet)</button>
+                </section>
+
+                <section class="card credibility-card">
+                    <h3>👩‍🔬 Penasaran Cara Kerjanya?</h3>
+                    <button id="btn-credibility" class="btn-info">Cek Rumus Medisnya Di Sini 🧠</button>
+                </section>
             </div>
 
-            <div class="timeline-card">
-                <h3>🗓️ Jadwal Tubuhmu Bulan Ini:</h3>
-                <ul class="timeline-list">
-                    <li class="clickable-phase" data-phase="menstruasi">
-                        🩸 <strong>Menstruasi:</strong> <span id="date-menstruasi"></span>
-                        <span class="click-hint">(Klik buat baca info ilmiahnya 👩‍🔬)</span>
-                    </li>
-                    <li class="clickable-phase" data-phase="folikuler">
-                        🌸 <strong>Folikuler:</strong> <span id="date-follicular"></span>
-                        <span class="click-hint">(Klik buat baca info ilmiahnya 👩‍🔬)</span>
-                    </li>
-                    <li class="clickable-phase" data-phase="ovulasi">
-                        🔥 <strong>Ovulasi (Subur):</strong> <span id="date-ovulation"></span>
-                        <span class="click-hint">(Klik buat baca info ilmiahnya 👩‍🔬)</span>
-                    </li>
-                    <li class="clickable-phase" data-phase="luteal">
-                        ☁️ <strong>Luteal (PMS):</strong> <span id="date-luteal"></span>
-                        <span class="click-hint">(Klik buat baca info ilmiahnya 👩‍🔬)</span>
-                    </li>
-                    <li>🩸 <strong>Haid Berikutnya:</strong> <span id="date-next-period"></span></li>
-                </ul>
-            </div>
-        </section>
-    </div>
+            <!-- KOLOM KANAN: HASIL -->
+            <div class="right-column">
+                <section id="result-section" class="card result-section">
+                    
+                    <div id="overdue-alert" class="overdue-box hidden">
+                        <h3>🚨 Sayangg, Telat Mens?</h3>
+                        <p>Tanggal haidmu udah lewat nih. Kalau belum mens juga, coba cek ini ya:</p>
+                        <ul>
+                            <li><strong>Stres / Kecapekan:</strong> Kurangin *overthinking* dan istirahat!</li>
+                            <li><strong>Gaya Hidup:</strong> Pola makan ngaruh banget lho ke hormon.</li>
+                            <li><strong>Indikasi Hamil:</strong> Kalau ngerasa mual pagi hari, payudara sensitif bengkak, jaga diri baik-baik dan coba testpack ya!</li>
+                        </ul>
+                    </div>
 
-    <!-- Kotak Pop-up (Modal) Penjelasan Jurnal Ilmiah -->
-    <div id="science-modal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-btn" id="close-modal">&times;</span>
-            <h3 id="modal-title">Judul Fase</h3>
-            <div id="modal-body" class="modal-body-text">
-                Teks penjelasan jurnal ilmiah akan muncul di sini.
+                    <div class="ring-container">
+                        <div class="cycle-ring float-anim">
+                            <span id="day-counter">Hari ke-?</span>
+                        </div>
+                        <p class="saved-date-text" id="saved-date-display">Haid Terakhir: -</p>
+                    </div>
+                    
+                    <div class="countdown-box" id="countdown-box">
+                        <h3 id="next-period-countdown">Haid berikutnya dalam: ? hari</h3>
+                    </div>
+
+                    <button id="btn-gombal" class="btn-gombal float-anim">Lagi Nyeri Mens? Klik Aku 🥺💊</button>
+                    
+                    <h2 id="phase-title">Fase Saat Ini</h2>
+                    <div class="insight-card">
+                        <p id="cute-message" class="message">Tunggu kalkulasi...</p>
+                        <div class="tips-box">
+                            <strong>💡 Saran dari Aku:</strong>
+                            <p id="health-tips">-</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card">
+                        <h3>🗓️ Jadwal Tubuhmu:</h3>
+                        <ul class="timeline-list">
+                            <li class="clickable-phase" data-phase="menstruasi">🩸 <strong>Menstruasi:</strong> <span id="date-menstruasi">-</span> <span class="click-hint">(Klik untuk info ilmiah 🔬)</span></li>
+                            <li class="clickable-phase" data-phase="folikuler">🌸 <strong>Folikuler:</strong> <span id="date-follicular">-</span> <span class="click-hint">(Klik untuk info ilmiah 🔬)</span></li>
+                            <li class="clickable-phase" data-phase="ovulasi">🔥 <strong>Ovulasi (Subur):</strong> <span id="date-ovulation">-</span> <span class="click-hint">(Klik untuk info ilmiah 🔬)</span></li>
+                            <li class="clickable-phase" data-phase="luteal">☁️ <strong>Luteal (PMS):</strong> <span id="date-luteal">-</span> <span class="click-hint">(Klik untuk info ilmiah 🔬)</span></li>
+                            <li>🩸 <strong>Haid Berikutnya:</strong> <span id="date-next-period">-</span></li>
+                        </ul>
+                        
+                        <button id="btn-save-permanent" class="btn-save hidden">💾 Simpan Jadwal Ini Permanen</button>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
 
+    <!-- MODAL POP-UP INFO ILMIAH -->
+    <div id="science-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h3 id="modal-title">Judul Fase</h3>
+            <div id="modal-body" class="modal-body-text">Info ilmiah...</div>
+        </div>
+    </div>
+
+    <!-- MODAL GAMES GOMBALAN -->
+    <div id="gombal-modal" class="modal hidden">
+        <div class="modal-content text-center">
+            <span class="close-btn" id="close-gombal">&times;</span>
+            <h3>✨ Kapsul Pereda Nyeri ✨</h3>
+            <p id="gombal-text" class="gombal-text">Tarik napas panjang...</p>
+            <button id="btn-next-gombal" class="btn-cute mt-10">Pencet Lagi Dong 🥺</button>
+        </div>
+    </div>
+
+    <!-- MODAL KREDIBILITAS RUMUS (FIXED & DI-UPGRADE TOTAL SESUAI IMAGE_9AE59A.PNG) -->
+    <div id="credibility-modal" class="modal hidden">
+        <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+            <span class="close-btn" id="close-credibility">&times;</span>
+            <h3>🧠 Cara Sistem Ini Menghitung Fase</h3>
+            <div class="modal-body-text" style="font-size: 0.9rem;">
+                <p>Secara medis, siklus menstruasi diatur secara ketat oleh sumbu Hipotalamus-Pituitari-Ovarium (HPO axis). Aplikasi ini sangat presisi karena tidak menebak maju, melainkan menggunakan metode <strong>Backward-Calculation</strong> (berhitung mundur) dari hari proyeksi masa depan.</p>
+                <hr style="margin: 10px 0; border: 0.5px solid var(--accent-pink);">
+                <ul>
+                    <li style="margin-bottom: 12px;"><strong>1. Menstruasi Berikutnya:</strong> Dihitung otomatis dari tanggal mulai haid terakhir ditambah rata-rata panjang siklus yang kamu masukkan (Hari H berikutnya = Tanggal Terakhir + Panjang Siklus).</li>
+                    <li style="margin-bottom: 12px;"><strong>2. Fase Luteal (PMS):</strong> Secara biologis, fase luteal (sesudah masa subur) itu umurnya selalu konstan dan eksak berdurasi 14 hari sebelum menstruasi berikutnya datang karena usia luruhnya korpus luteum rahim yang selalu tetap.</li>
+                    <li style="margin-bottom: 12px;"><strong>3. Puncak Ovulasi (Masa Subur):</strong> Dihitung persis dengan cara berhitung mundur mundur 14 hari tepat sebelum jadwal menstruasi berikutnya tiba (Hari Ovulasi = Hari H berikutnya - 14 Hari).</li>
+                    <li style="margin-bottom: 12px;"><strong>4. Jendela Subur (Fertile Window):</strong> Mengingat daya hidup sperma bisa bertahan hingga 5 hari dan sel telur siap dibuahi selama 24 jam, masa subur ini dihitung menyelimuti hari ovulasi (4 hari sebelum ovulasi sampai 1 hari setelah ovulasi).</li>
+                    <li style="margin-bottom: 12px;"><strong>5. Fase Folikuler:</strong> Nah, ini adalah celah sisa hari setelah masa menstruasi selesai (biasanya hari ke-8) sampai tepat sebelum pintu masa subur/ovulasi terbuka. Fase ini dihitung otomatis dengan memotong sisa hari siklus tubuh setelah dikurangi masa haid dan masa luteal. Variasi panjang pendeknya siklus haid perempuan dipengaruhi oleh durasi folikuler ini!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
