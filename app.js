@@ -48,7 +48,7 @@ document.getElementById('btn-save-permanent').addEventListener('click', function
     window.localStorage.setItem('sarah-cycles-v3', JSON.stringify(history));
 
     // MENGIRIM DATA KE GOOGLE SPREADSHEET
-    const API_URL = "https://script.google.com/macros/s/AKfycby-4cpc9u7cj0RENdydkdTo2WF0kJdWPMdZZMnrUmvLIlovPRLzUFMWz6EPIpSmJ_tI3g/exec"; 
+    const API_URL = "https://script.google.com/macros/s/AKfycbxIPMWo_ejBpAo6CCeIh3nCVa3EHS7Uh6GU62exu0qpPN_aPF1LMU9YgKUbL-rbqxrK1w/exec"; 
     
     let startDateStr = new Date(tempData.start).toLocaleDateString("id-ID", { day: 'numeric', month: 'long', year: 'numeric' });
     let endDateStr = tempData.end ? new Date(tempData.end).toLocaleDateString("id-ID", { day: 'numeric', month: 'long', year: 'numeric' }) : "Belum Berhenti";
